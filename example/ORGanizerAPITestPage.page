@@ -1,0 +1,114 @@
+<!-- @author: Enrico Murru
+@created: 2018-02-02
+@description: ORGanizer APIs testing page
+-->
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="False" applyHtmlTag="False" lightningStylesheets="true">
+    <head>
+        <title>ORGanizer APIs test page</title>
+        <apex:slds />
+        <style>
+        	.pre-result{
+            	max-height: 150px;
+	            overflow:auto;
+            }
+        </style>
+    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" />
+    <apex:includescript value="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" />
+    <apex:includeScript value="https://rawgit.com/enreeco/release/organizer-apis-stage-0.0.1.min.js"/>
+    <script>
+    $(function(){
+        //init UI
+        for(var k in $ORGanizer.CONSTANTS.LOGIN_MODE){
+            $('#openMode').append($('<option></option>').val($ORGanizer.CONSTANTS.LOGIN_MODE[k]).text(k));
+        }
+        $("#openMode").val($("#openMode option:nth-child(2)").val());
+        
+        //init event handlers
+        function serializePretty(msg){
+            return JSON.stringify(msg, null, 2);
+        }
+
+        $('#getVersionBtn').click(function(){
+            $ORGanizer.getVersion(function(version){
+                $('#txtVersion').html(serializePretty(version));
+            });
+        });
+        
+        $('#isAwesomeBtn').click(function(){
+            $ORGanizer.isAwesome(function(result){
+                $('#txtAwesome').html(serializePretty(result));
+            });
+        });
+        
+        $('#loginBtn').click(function(){
+            $ORGanizer.login($('#username').val(),
+                             $('#openMode').val(),
+                             $('#landingPage').val(),
+                             function(result){
+                				$('#txtLogin').html(serializePretty(result));
+            });
+        })
+    });
+    </script>
+    
+    <body class="slds-scope">
+        <div style="background-color:#e5e9fb; text-align:center">
+            <img src="http://organizer.enree.co/img/logo2.png" style="width:50px"/>
+        </div>
+        <div class="slds-page-header" style="text-align: center;">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="New Community Subscription">ORGanizer APIs test page</h1>
+                    <p class="slds-text-body slds-line-height_reset">
+                        Developing cool APIs...
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slds-align--absolute-center" style="margin: 10px !important;">
+            <div class="slds-form slds-form_horizontal" style="width: 1000px" >
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getVersionBtn" class="slds-button slds-button--brand" >getVersion()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2">
+                        <pre id="txtVersion" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="isAwesomeBtn" class="slds-button slds-button--brand" >isAwesome()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtAwesome" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+                
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="loginBtn" class="slds-button slds-button--brand" >login()</button>
+                        <input id="username" class="slds-input" type="text" maxlength="80" value="" placeholder="Username *"/>
+                        <select id="openMode" class="slds-select">
+                            <option value="">Select a login mode *</option>
+                        </select>
+                        <input id="landingPage" class="slds-input" type="text" maxlength="80" value="" placeholder="Lading Page"/>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtLogin" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+				
+            </div>
+        </div>
+        
+        
+    </body>
+    
+</apex:page>
