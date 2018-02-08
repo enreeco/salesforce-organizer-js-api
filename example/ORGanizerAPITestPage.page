@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8" />
     <apex:includescript value="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" />
-    <apex:includeScript value="https://rawgit.com/enreeco/release/organizer-apis-stage-0.0.1.min.js"/>
+    <apex:includeScript value="https://rawgit.com/enreeco/salesforce-organizer-js-api/master/release/organizer-apis-stage-0.0.1.min.js"/>
     <script>
     $(function(){
         //init UI
