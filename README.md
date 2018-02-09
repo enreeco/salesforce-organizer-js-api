@@ -69,6 +69,27 @@ $ORGanizer.login(username, loginMode, landingPage, function(rslt){});
 }
 ```
 
+**loginAs()**
+
+Login as another user in the current ORG.
+
+Only supports inner Salesforce users.
+
+```javascript
+var userId = '00512345678945';
+var incognitoMode = true;
+$ORGanizer.loginAs(username, incognitoMode, function(rslt){});
+```
+
+*Response*:
+
+```json
+{
+  "success": true,
+  "result": true
+}
+```
+
 
 **isAwesome()**
 
