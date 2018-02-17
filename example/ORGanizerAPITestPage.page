@@ -7,9 +7,9 @@
         <title>ORGanizer APIs test page</title>
         <apex:slds />
         <style>
-        	.pre-result{
-            	max-height: 150px;
-	            overflow:auto;
+            .pre-result{
+                max-height: 150px;
+                overflow:auto;
             }
         </style>
     </head>
@@ -41,21 +41,83 @@
                 $('#txtAwesome').html(serializePretty(result));
             });
         });
+        $('#getOrgInfoBtn').click(function(){
+            $ORGanizer.getOrgInfo(function(result){
+                $('#txtOrgInfo').html(serializePretty(result));
+            });
+        });
+
+        $('#getVIQsBtn').click(function(){
+            $ORGanizer.getVIQs(function(result){
+                $('#txtgetVIQs').html(serializePretty(result));
+            });
+        });
+
+        $('#getVISsBtn').click(function(){
+            $ORGanizer.getVISs(function(result){
+                $('#txtgetVISs').html(serializePretty(result));
+            });
+        });
+
+        $('#getAPICounterBtn').click(function(){
+            $ORGanizer.getAPICounter(function(result){
+                $('#txtGetAPICounter').html(serializePretty(result));
+            });
+        });
+
+        $('#getLicenseBtn').click(function(){
+            $ORGanizer.getLicense(function(result){
+                $('#txtgetLicense').html(serializePretty(result));
+            });
+        });
+
+        $('#executeAnonymousBtn').click(function(){
+            var script = $('#scriptTxt').val();
+            var debugLevels = {
+                'Db' : 'DEBUG',
+                'Workflow' : 'DEBUG',
+                'Validation' : 'DEBUG',
+                'Callout' : 'DEBUG',
+                'Apex_code' : 'DEBUG',
+                'Apex_profiling' : 'DEBUG',
+                'Visualforce' : 'DEBUG',
+                'System' : 'DEBUG',
+            };
+            $ORGanizer.executeAnonymous(script, debugLevels, function(result){
+                $('#txtexecuteAnonymous').html(serializePretty(result));
+            });
+        });
+
+        $('#loginAsBtn').click(function(){
+            var userId = $('#userId').val();
+            var incognito = false;
+            $ORGanizer.loginAs(userId, incognito, function(result){
+                $('#txtloginAs').html(serializePretty(result));
+            });
+        });
+
+        $('#getLimitsBtn').click(function(){
+            $ORGanizer.getLimits(function(result){
+                $('#txtgetLimits').html(serializePretty(result));
+            });
+        });
         
         $('#loginBtn').click(function(){
             $ORGanizer.login($('#username').val(),
                              $('#openMode').val(),
                              $('#landingPage').val(),
                              function(result){
-                				$('#txtLogin').html(serializePretty(result));
+                                $('#txtLogin').html(serializePretty(result));
             });
-        })
+        });
+
+
     });
     </script>
     
     <body class="slds-scope">
         <div style="background-color:#e5e9fb; text-align:center">
-            <img src="http://organizer.enree.co/img/logo2.png" style="width:50px"/>
+            <img src="/servlet/servlet.ImageServer?id=0150Y000000DIoY&oid=00D0Y000000YDEz" style="width:50px"/>
         </div>
         <div class="slds-page-header" style="text-align: center;">
             <div class="slds-media">
@@ -92,6 +154,88 @@
                 
                 <div class="slds-form-element ">
                     <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getOrgInfoBtn" class="slds-button slds-button--brand" >getOrgInfo()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtOrgInfo" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getAPICounterBtn" class="slds-button slds-button--brand" >getAPICounter()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtGetAPICounter" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getVIQsBtn" class="slds-button slds-button--brand" >getVIQs()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtgetVIQs" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getVISsBtn" class="slds-button slds-button--brand" >getVISs()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtgetVISs" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getLimitsBtn" class="slds-button slds-button--brand" >getLimits()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtgetLimits" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="getLicenseBtn" class="slds-button slds-button--brand" >getLicense()</button>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtgetLicense" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="executeAnonymousBtn" class="slds-button slds-button--brand" >executeAnonymous()</button>
+                        <textarea id="scriptTxt" class="slds-input" value="" placeholder="System.debug('Hello world!');"/>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtexecuteAnonymous" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <button id="loginAsBtn" class="slds-button slds-button--brand" >loginAs()</button>
+                        <input id="userId" class="slds-input" type="text" maxlength="80" value="" placeholder="User ID*"/>
+                    </div>
+                    
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
+                        <pre id="txtloginAs" class="slds-input pre-result"  ></pre>
+                    </div>
+                </div>
+
+                
+                <div class="slds-form-element ">
+                    <div class="slds-form-element__control slds-size_1-of-2 ">
                         <button id="loginBtn" class="slds-button slds-button--brand" >login()</button>
                         <input id="username" class="slds-input" type="text" maxlength="80" value="" placeholder="Username *"/>
                         <select id="openMode" class="slds-select">
@@ -104,7 +248,7 @@
                         <pre id="txtLogin" class="slds-input pre-result"  ></pre>
                     </div>
                 </div>
-				
+                
             </div>
         </div>
         
